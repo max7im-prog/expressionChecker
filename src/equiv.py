@@ -27,9 +27,35 @@ class Equiv:
         ret = ret + Equiv.ruleAddZero(equation)
         ret = ret + Equiv.ruleMultiplyByOne(equation)
         ret = ret + Equiv.ruleDevideNumbers(equation)
+        # ret = ret + Equiv.ruleAddPowerOne(equation)
+        ret = ret + Equiv.ruleRemovePowerOne(equation)
 
         return ret
 
+    # @staticmethod
+    # def ruleAddPowerOne(equation: Tree) -> List[Tree]:
+    #     """
+    #     Add a power of 1: x -> x^1
+    #     """
+    #     ret: List[Tree] = []
+    #     if equation.data not in {"pow", "num"}:  # Avoid adding redundant power to numbers or existing powers
+    #         power_elem = Tree("pow", [equation, Tree("num", [Token("NUMBER", "1")])])
+    #         ret.append(power_elem)
+    #     return ret
+
+    @staticmethod
+    def ruleRemovePowerOne(equation: Tree) -> List[Tree]:
+        """
+        Remove a power of 1: x^1 -> x
+        """
+        ret: List[Tree] = []
+        if equation.data == "pow" and len(equation.children) == 2:
+            base, exponent = equation.children
+            if exponent.data == "num" and float(exponent.children[0].value) == 1:
+                ret.append(base)
+        return ret
+    
+    
     @staticmethod
     def ruleDevideNumbers(equation: Tree) -> List[Tree]:
         "(a*g*98)/(k*p*2) = (a*g*49)/(k*p)"

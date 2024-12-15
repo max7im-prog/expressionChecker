@@ -99,12 +99,12 @@ class ExpressionChecker:
         streq2: str = ""
 
         if eq1 in self.eqMap:
-            streq1 = self.eqMap[eq1].repr
+            streq1 = self.eqMap[eq1.tree].repr
         else:
             streq1 = eq1.__str__()
 
         if eq2 in self.eqMap:
-            streq2 = self.eqMap[eq2].repr
+            streq2 = self.eqMap[eq2.tree].repr
         else:
             streq2 = eq2.__str__()
 

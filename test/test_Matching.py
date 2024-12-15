@@ -63,13 +63,14 @@ class TestMatching(unittest.TestCase):
         '''
         
         checker: ExpressionChecker = ExpressionChecker(eq1,eq2,True)
-        run = checker.search()
+        run = checker.search(100)
         ans = next(run)
         
-        self.assertEqual(ans[0],"f")
+        
         ans[2].normalize()
         ans[3].normalize()
-        self.assertEqual(ans[2].tree, ans[3].tree)
+        self.assertEqual(ans[2].tree, ans[3].tree,"\n" + ans[2].forestPretty())
+        self.assertEqual(ans[0],"f")
         
         
     
