@@ -33,10 +33,10 @@ def main():
     # eq2 = "sum(fraq(mul(var(M_{1}), mul(var(b_{1}), var(T_{1}))), var(W_{1})), fraq(mul(num(-1), mul(var(M_{2}), mul(var(D_{2}), var(T_{2})))), var(W_{2})))"
     
     eq1 = '''
-        udf(f, pow(pow(var(c),num(1)), sum(sum(num(2), num(3)), var(e))))
+        sum(mul(pow(var(x), fraq(num(1), num(2))), fraq(var(b), var(c))), log(var(a), var(x)))
         '''
     eq2 = '''
-        udf(f, pow(var(a), sum(sum(var(b), num(1)), num(4))))
+        sum(mul(var(h), var(theta)), log(mul(num(-1), pow(num(6), var(d))), var(dnu)))
         '''
     
     checker: ExpressionChecker = ExpressionChecker(eq1,eq2,True)
@@ -59,6 +59,7 @@ def main():
     print(checker.forest1.forestPretty())
     print(checker.forest2.forestPretty())
     
+    print(n1.getGrammarStringRepr())
     print(SearchNode(n1.getGrammarStringRepr()))
     
     # ans = ExpressionChecker.getEqualUpToVariables(checker.forest1,checker.forest2)

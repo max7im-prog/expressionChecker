@@ -15,6 +15,9 @@ class SearchNode:
     
     @staticmethod
     def equationRepr(tree: Tree):
+        '''
+        returns a representation of an equation
+        '''
         arr = []
         ans = ""
         for ch in tree.children:
@@ -50,6 +53,14 @@ class SearchNode:
             for ch in arr[1::]:
                 ans = ans + "**" + SearchNode.equationRepr(ch)
             ans = ans + ")"
+        
+        elif(tree.data == "log"):
+            ans = ans + "log("
+            ans = ans + SearchNode.equationRepr(arr[0])
+            for ch in arr[1::]:
+                ans = ans + "," + SearchNode.equationRepr(ch)
+            ans = ans + ")"
+        
         elif(tree.data == "udf"):
             ans = ans + arr[0].children[0]
             ans = ans + "("
@@ -90,6 +101,14 @@ class SearchNode:
             ans = ans + ")"
         elif(tree.data == "fraq"):
             ans = ans + "fraq"
+            ans = ans + "("
+            ans = ans + SearchNode.getGrammarString_static(arr[0])
+            for ch in arr[1::]:
+                ans = ans + "," + SearchNode.getGrammarString_static(ch)
+            ans = ans + ")"
+            
+        elif(tree.data == "log"):
+            ans = ans + "log"
             ans = ans + "("
             ans = ans + SearchNode.getGrammarString_static(arr[0])
             for ch in arr[1::]:
