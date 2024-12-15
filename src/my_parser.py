@@ -1,14 +1,11 @@
-
 import lark
 from lark import Tree, Token
 from normalize import NormalizeTree
 
 
-
-
-
 class MyParser:
     "This class parses a string with custom grammar into a lark.Tree"
+
     def __init__(self):
 
         self.grammar: str = """
@@ -53,12 +50,11 @@ class MyParser:
     """
 
     def parse(self, str_in: str) -> lark.Tree:
+        """
+        function used to parse a grammar into Lark.Tree
+        """
         ret: lark.Tree
 
         parser = lark.Lark(grammar=self.grammar)
         ret = parser.parse(str_in)
         return ret
-
-
-
-

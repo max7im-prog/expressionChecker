@@ -12,9 +12,10 @@ from lark import Tree, Token
 
 
 class ExpressionChecker:
-    '''
+    """
     A class used to check if equations can be derived from one another
-    '''
+    """
+
     def __init__(
         self, str1: AnyStr, str2: AnyStr, searchUpToVariablesSubstitution=False
     ):
@@ -47,12 +48,13 @@ class ExpressionChecker:
         self.foundEquivalent = False
 
     class mapEntry:
-        '''
+        """
         entry of a map where the all previously accessed trees lark,Trees are located
         repr - string representation of lark.tree
         node1, node2 - references to some tree in first or second forest that are already visited
         if node1 or node2 is none, then this tree was not accessed from corresponding forest
-        '''
+        """
+
         def __init__(self, repr: str):
             self.repr: str = repr
             self.node1: SearchNode = None
@@ -74,12 +76,13 @@ class ExpressionChecker:
             return ret
 
     class heapEntry:
-        '''
+        """
         entry of a heap where the next pair of equations to expand is calculated
         metricValue - a value according to which the position in a heap is determined
         distance - a value showing how far away 2 equations are, different from metricValue
         node1, node2 - references to 2 nodes to expand
-        '''
+        """
+
         def __init__(
             self, eq1: SearchNode, eq2: SearchNode, metric: int, distance: int
         ):
@@ -110,9 +113,9 @@ class ExpressionChecker:
         eq2: SearchNode,
         metric: callable = Metrics.levenshteinMetric,
     ) -> None:
-        '''
+        """
         adds a pair of SearchNodes to heap keeping the heap order
-        '''
+        """
         streq1: str = ""
         streq2: str = ""
 
@@ -139,9 +142,9 @@ class ExpressionChecker:
         heapq.heappush(self.heap, value)
 
     def getPairWithLowestMetric(self) -> "ExpressionChecker.heapEntry":
-        '''
+        """
         returns a pair from the top of the heap
-        '''
+        """
         try:
             ret: ExpressionChecker.heapEntry = heapq.heappop(self.heap)
         except IndexError as e:
@@ -152,13 +155,13 @@ class ExpressionChecker:
         return ret
 
     def addEqToMap(self, eq: SearchNode, first_or_second: int) -> None:
-        '''
+        """
         adds a SearchNode to the map of previously used/visited nodes
         Maps by the tree of a node, not by the node itself
         eq - node to add
         first_or_second - determines whenever the map entry will be  marked as accessed from
-        the first equation or the second equation        
-        '''
+        the first equation or the second equation
+        """
         if eq.tree not in self.eqMap:
             self.eqMap[eq.tree] = ExpressionChecker.mapEntry(eq.__str__())
 
@@ -287,11 +290,11 @@ class ExpressionChecker:
     def getEqualUpToVariables(
         eq1: SearchNode, eq2: SearchNode
     ) -> Tuple[SearchNode, SearchNode]:
-        '''
-        Looks for a fitting substitution of variables that will lead to the same equation 
-        if found, returns 2 search nodes - for first and second equation respectively. 
+        """
+        Looks for a fitting substitution of variables that will lead to the same equation
+        if found, returns 2 search nodes - for first and second equation respectively.
         Otherwise returns (None, None)
-        '''
+        """
         varArr1: List[Tree] = []
         varArr2: List[Tree] = []
         varArrSub1: List[Tree] = []

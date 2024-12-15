@@ -54,8 +54,7 @@ class Equiv:
             if exponent.data == "num" and float(exponent.children[0].value) == 1:
                 ret.append(base)
         return ret
-    
-    
+
     @staticmethod
     def ruleDevideNumbers(equation: Tree) -> List[Tree]:
         "(a*g*98)/(k*p*2) = (a*g*49)/(k*p)"
