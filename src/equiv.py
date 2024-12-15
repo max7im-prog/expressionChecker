@@ -78,6 +78,8 @@ class Equiv:
                         mul = mul * float(elem.children[0].value)
                     else:
                         upArr = upArr + [elem]
+            else:
+                upArr = [up]
 
             if down.data == "num":
                 numMultDown += 1
@@ -95,6 +97,8 @@ class Equiv:
                             return []  # division by zero
                     else:
                         downArr = downArr + [elem]
+            else:
+                downArr = [down]
 
             if (numMultDown > 0) or (numMultUp > 1):
                 upArr = upArr + [Tree("num", [Token("NUMBER", str(mul))])]

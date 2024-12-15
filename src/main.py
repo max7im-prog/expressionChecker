@@ -28,10 +28,10 @@ def main():
     # eq2 = "sum(fraq(mul(var(M_{1}), mul(var(b_{1}), var(T_{1}))), var(W_{1})), fraq(mul(num(-1), mul(var(M_{2}), mul(var(D_{2}), var(T_{2})))), var(W_{2})))"
 
     eq1 = """
-        sum(mul(pow(var(x), fraq(num(1), num(2))), fraq(var(b), var(c))), log(var(a), var(x)))
+        sum(sum(fraq(var(x), num(2)), num(2)), num(-7))
         """
     eq2 = """
-        sum(mul(var(h), var(theta)), log(mul(num(-1), pow(num(6), var(d))), var(dnu)))
+        sum(num(-7), fraq(mul(num(4), sum(var(x), num(2))), num(8)))
         """
 
     checker: ExpressionChecker = ExpressionChecker(eq1, eq2, True)
@@ -51,8 +51,8 @@ def main():
     print("--------------------------------------------------")
     print(n2.lineagePretty(8))
 
-    print(checker.forest1.forestPretty())
-    print(checker.forest2.forestPretty())
+    print(checker.forest1.forestPretty(7))
+    print(checker.forest2.forestPretty(7))
 
     print(n1.getGrammarStringRepr())
     print(SearchNode(n1.getGrammarStringRepr()))
