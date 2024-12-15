@@ -297,3 +297,33 @@ class TestMatching(unittest.TestCase):
         
         self.assertEqual(ans[2].tree, ans[3].tree)
         self.assertEqual(ans[0],"f")
+        
+        
+    def test_divideNumbers_4(self):
+        eq1 = """
+        sum(num(-7), fraq(mul(num(4), sum(var(x), num(2))), num(8)))
+        """
+        eq2 = '''
+            sum(
+                num(-7),
+                
+                num(1),
+                mul(
+                    num(0.5),
+                    var(x)
+                )
+                
+            )
+        
+        '''
+            
+        checker: ExpressionChecker = ExpressionChecker(eq1,eq2,True)
+        run = checker.search()
+        ans = next(run)
+        
+        
+        ans[2].normalize()
+        ans[3].normalize()
+        
+        self.assertEqual(ans[2].tree, ans[3].tree,"\n" + checker.forest1.forestPretty())
+        self.assertEqual(ans[0],"f")

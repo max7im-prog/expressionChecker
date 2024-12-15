@@ -28,11 +28,19 @@ def main():
     # eq2 = "sum(fraq(mul(var(M_{1}), mul(var(b_{1}), var(T_{1}))), var(W_{1})), fraq(mul(num(-1), mul(var(M_{2}), mul(var(D_{2}), var(T_{2})))), var(W_{2})))"
 
     eq1 = """
-        sum(sum(fraq(var(x), num(2)), num(2)), num(-7))
-        """
-    eq2 = """
         sum(num(-7), fraq(mul(num(4), sum(var(x), num(2))), num(8)))
         """
+    eq2 = '''
+            sum(
+                num(-7),
+                num(1),
+                mul(
+                    num(0.5),
+                    var(x)
+                )
+            )
+        
+        '''
 
     checker: ExpressionChecker = ExpressionChecker(eq1, eq2, True)
     numIter = 500
@@ -56,6 +64,8 @@ def main():
 
     print(n1.getGrammarStringRepr())
     print(SearchNode(n1.getGrammarStringRepr()))
+    print(n2.getGrammarStringRepr())
+    print(SearchNode(n2.getGrammarStringRepr()))
 
     # ans = ExpressionChecker.getEqualUpToVariables(checker.forest1,checker.forest2)
 
